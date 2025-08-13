@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lasă-ne un review</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #fafafa;
+        padding: 40px;
+    }
+    h1 {
+        color: #333;
+    }
+    .stars {
+        font-size: 40px;
+        cursor: pointer;
+    }
+    .selected {
+        color: gold;
+    }
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<h1>Ce părere ai despre experiența ta?</h1>
+<div id="starContainer" class="stars">
+    ★ ★ ★ ★ ★
+</div>
+<button id="submitBtn" disabled>Trimite feedback</button>
+
+<script>
+    const stars = document.querySelectorAll("#starContainer span, #starContainer");
+    const container = document.getElementById("starContainer");
+    const btn = document.getElementById("submitBtn");
+
+    let rating = 0;
+    container.innerHTML = "";
+    for (let i = 1; i <= 5; i++) {
+        const star = document.createElement("span");
+        star.textContent = "★";
+        star.addEventListener("click", () => {
+            rating = i;
+            highlightStars(i);
+            btn.disabled = false;
+        });
+        container.appendChild(star);
+    }
+
+    function highlightStars(count) {
+        const allStars = container.querySelectorAll("span");
+        allStars.forEach((s, index) => {
+            if (index < count) {
+                s.classList.add("selected");
+            } else {
+                s.classList.remove("selected");
+            }
+        });
+    }
+
+    btn.addEventListener("click", () => {
+        if (rating === 5) {
+            // Redirecționează către Google Review (înlocuiește cu link-ul tău real)
+            window.location.href = "https://g.page/r/xxxxxxxxxx/review";
+        } else {
+            // Redirecționează către formular privat (poate fi Google Form)
+            window.location.href = "https://forms.gle/xxxxxxxxxx";
+        }
+    });
+</script>
+
+</body>
+</html>
